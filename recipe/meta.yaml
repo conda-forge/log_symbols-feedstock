@@ -11,20 +11,26 @@ source:
 
 build:
   noarch: python
-  number: 0
-  script: '{{ PYTHON }} -m pip install . -vv'
+  number: 1
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python
+    - python >=2.7
+    - setuptools
   run:
     - colorama >=0.3.9
-    - python
+    - python >=2.7
 
 test:
+  requires:
+    - pip
   imports:
     - log_symbols
+  commands:
+    - python -m pip check
+    - python -m pip show log_symbols
 
 about:
   home: https://github.com/manrajgrover/py-log-symbols
@@ -36,4 +42,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - timkpaine
     - duncanmmacleod
